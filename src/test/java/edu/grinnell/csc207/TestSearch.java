@@ -126,4 +126,17 @@ public class TestSearch {
     assertBinarySearchFinds(new int[] { 1, 1, 1, 2, 2, 3 }, 3);
   } // testBinarySearchDups()
 
+  /**
+   * Searching with negatives.
+   */
+  @Test
+  void testBinarySearchNegative() throws Exception {
+    assertBinarySearchFinds(new int[] { -1, 1, 1, 2, 2, 3 }, -1);
+    assertBinarySearchFinds(new int[] { -5, -1, 1, 1, 2, 2, 3 }, 2);
+    assertBinarySearchFails(new int[] { -1, -1, 0, 2, 2, 3 }, 1);
+    assertBinarySearchFinds(new int[] { -5, -3, -1, -1, 0, 0}, -3);
+  } // testBinarySearchDups()
+
+
+
 } // class TestSearch
