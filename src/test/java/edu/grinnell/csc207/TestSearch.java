@@ -1,14 +1,9 @@
 package edu.grinnell.csc207;
 
-import java.util.Arrays;
-
-import java.util.function.Supplier;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import java.util.Arrays;
 import org.junit.jupiter.api.Test;
-
 import edu.grinnell.csc207.util.SearchUtils;
 
 /**
@@ -135,6 +130,21 @@ public class TestSearch {
     assertBinarySearchFinds(new int[] { -5, -1, 1, 1, 2, 2, 3 }, 2);
     assertBinarySearchFails(new int[] { -1, -1, 0, 2, 2, 3 }, 1);
     assertBinarySearchFinds(new int[] { -5, -3, -1, -1, 0, 0}, -3);
+  } // testBinarySearchDups()
+
+  @Test
+  void testBinarySearchPhaseTwo() throws Exception {
+    for(int s = 1; s < 33; s++) { 
+      int[] arr = new int[s];
+      for(int i = 0; i < s; i++) { 
+        arr[i] = 2*i;
+      }
+
+      for(int i = 0; i < s; i++) { 
+        assertBinarySearchFinds(arr, i*2);
+        assertBinarySearchFails(arr, i*2 + 1);
+      }
+    }
   } // testBinarySearchDups()
 
 
