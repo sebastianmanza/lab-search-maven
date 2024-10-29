@@ -33,21 +33,20 @@ public class SearchUtils {
    */
   static int iterativeBinarySearch(int[] vals, int val) throws Exception {
     int lb = 0;
-    int ub = vals.length - 1;
+    int ub = vals.length;
     while (ub > lb) {
       int mid = (ub + lb) / 2;
-      if (val == vals[mid]) {
-        return mid;
-      }
       if (val < vals[mid]) {
         ub = mid;
       }
-      else {
-        lb = mid;
+      else if (val > vals[mid]){
+        lb = mid + 1;
       }
-
+      if (val == vals[mid]) {
+        return mid;
+      }
     }
-    throw new Exception("val was not found.");
+    throw new Exception("val " + val + " was not found.");
   } // iterativeBinarySearch
 
   /**
@@ -68,7 +67,23 @@ public class SearchUtils {
    *   values[index] == val
    */
   static int recursiveBinarySearch(int[] vals, int val) throws Exception {
-    return 0;   // STUB
+    return recursiveBinarySearch(vals, val, 0, vals.length);
+  } // recursiveBinarySearch
+
+  static int recursiveBinarySearch(int[] vals, int val, int lb, int ub) throws Exception {
+    if (lb > ub) { 
+      throw new Exception("Element not found");
+    }
+    
+    int mid = (lb + ub) / 2;
+    if(val > vals[mid]) {
+      return recursiveBinarySearch(vals, val, mid + 1, ub);
+    } else if ( val < vals[mid]) { 
+      return recursiveBinarySearch(vals, val, lb, mid - 1);
+    } else { 
+      return mid;
+    }
+
   } // recursiveBinarySearch
 
   /**
@@ -145,8 +160,8 @@ public class SearchUtils {
    *   values[index] == val
    */
   public static int binarySearch(int[] vals, int val) throws Exception {
-    return iterativeBinarySearch(vals, val);
-    // return recursiveBinarySearch(vals, val);
+    // return iterativeBinarySearch(vals, val);
+    return recursiveBinarySearch(vals, val);
   } // binarySearch
 
 } // class SearchUtils
